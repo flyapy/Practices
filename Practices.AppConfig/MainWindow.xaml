@@ -1,0 +1,12 @@
+﻿<Window x:Class="Practices.AppConfig.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practices.AppConfig"
+        mc:Ignorable="d"
+        Title="App.config文件访问测试" Height="350" Width="525" ResizeMode="NoResize">
+    <Grid>
+        <Button Click="Button_Click" Width="200" Height="30">获取配置信息</Button>
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+﻿<Window x:Class="Practices.HttpService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Practices.HttpService.ViewModels"
+        xmlns:local="clr-namespace:Practices.HttpService"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Text="{Binding RawText}"></TextBox>
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Padding="2,0,2,0" Command="{Binding UrlEncodeCommand}">显示URLEncode结果</Button>
+        </StackPanel>
+    </Grid>
+</Window>

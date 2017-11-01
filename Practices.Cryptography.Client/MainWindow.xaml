@@ -1,0 +1,31 @@
+﻿<controls:MetroWindow x:Class="Practices.Cryptography.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practices.Cryptography.Client"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        mc:Ignorable="d"
+        Title="简单加密工具" Height="600" Width="800" FontFamily="微软雅黑">
+    <controls:MetroWindow.Resources>
+        <SolidColorBrush x:Key="FlatButtonBackgroundBrush" Color="White"></SolidColorBrush>
+    </controls:MetroWindow.Resources>
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Content="Settings" />
+            <Button Content="设置" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <StackPanel>
+            <Label Margin="20">www.wxzzz.com</Label>
+            <TextBox Margin="20"></TextBox>
+            <Button Margin="20" BorderBrush="LightBlue" BorderThickness="1" >
+                Metro Style Button
+            </Button>
+        </StackPanel>
+    </Grid>
+
+</controls:MetroWindow>

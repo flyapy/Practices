@@ -1,0 +1,99 @@
+﻿<Window x:Class="Practices.Udp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practices.Udp"
+        xmlns:vm="clr-namespace:Practices.Udp.ViewModels"
+        xmlns:vc="clr-namespace:Practices.Udp.ValueConverters"
+        mc:Ignorable="d"
+        Title="UDPClient" Height="600" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" 
+        Icon="blue0x80.ico">
+    <Window.Resources>
+        <vc:BooleanNotConverter x:Key="boolNotOp"></vc:BooleanNotConverter>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" Background="#eee" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="160"></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Header="远程主机" >
+                <StackPanel Orientation="Vertical" Margin="10" >
+                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                        <TextBlock Width="40" Height="26" FontFamily="微软雅黑" FontSize="14" VerticalAlignment="Center">主机</TextBlock>
+                        <TextBox Width="130" Height="26" FontFamily="微软雅黑" FontSize="14" Text="{Binding RemoteIp}" BorderBrush="LightGray"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                        <TextBlock Width="40" Height="26" FontFamily="微软雅黑" FontSize="14" VerticalAlignment="Center">端口</TextBlock>
+                        <TextBox Width="130" Height="26" FontFamily="微软雅黑" FontSize="14" Text="{Binding RemotePort, Mode=TwoWay}" BorderBrush="LightGray"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5" Visibility="Collapsed">
+                        <Button Margin="5" Height="26" Padding="5,0,5,0" FontFamily="微软雅黑" FontSize="14" Command="{Binding ApplyRemoteSettingCommand}">应用</Button>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="本地主机" Grid.Row="2">
+                <StackPanel Orientation="Vertical" Margin="10" >
+                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                        <TextBlock Width="40" Height="26" FontFamily="微软雅黑" FontSize="14" VerticalAlignment="Center" >主机</TextBlock>
+                        <TextBox Width="130" Height="26" FontFamily="微软雅黑" FontSize="14" Text="{Binding LocalIp, Mode=TwoWay}" 
+                                 BorderBrush="LightGray"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                        <TextBlock Width="40" Height="26" FontFamily="微软雅黑" FontSize="14" VerticalAlignment="Center">端口</TextBlock>
+                        <TextBox Width="130" Height="26" FontFamily="微软雅黑" FontSize="14" Text="{Binding LocalPort}" 
+                                 BorderBrush="LightGray"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2,5,5,5">
+                        <Button Margin="5" Height="26" Padding="5,0,5,0" FontFamily="微软雅黑" FontSize="14" 
+                                IsEnabled="{Binding IsUdpRecvRunning, Converter={StaticResource boolNotOp}}"
+                                Command="{Binding StartListeningCommand}">启动监听</Button>
+                        <Button Margin="5" Height="26" Padding="5,0,5,0" FontFamily="微软雅黑" FontSize="14" 
+                                IsEnabled="{Binding IsUdpRecvRunning}"
+                                Command="{Binding StopListeningCommand}">停止监听</Button>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding MessageInfo}" FontSize="14">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding ClearMessageCacheCommand}" Key="L" Modifiers="Ctrl"></KeyBinding>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Border Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="msgTxt" FontSize="14" Text="{Binding MessageToSend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessageCommand}" Key="Enter" Modifiers="Ctrl"></KeyBinding>
+                        </TextBox.InputBindings>
+                        
+                    </TextBox>
+                    <Button Height="80" Width="80" Grid.Column="1" FontSize="16" Command="{Binding SendMessageCommand}">发送</Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+    
+</Window>
